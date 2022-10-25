@@ -5,10 +5,18 @@ import java.util.Objects;
 public class Post {
     private int id;
     private String name;
-
     private String description;
-
     private String created;
+
+    public Post() {
+    }
+
+    public Post(int id, String name, String description, String created) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.created = created;
+    }
 
     public String getDescription() {
         return description;
@@ -23,16 +31,6 @@ public class Post {
     }
 
     public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public Post() {
-    }
-
-    public Post(int id, String name, String description, String created) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
         this.created = created;
     }
 
