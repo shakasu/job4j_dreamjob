@@ -17,7 +17,7 @@ public class PostStore {
     private PostStore() {
         posts.put(1, new Post(1, "Junior Java Job", "Solving easy tasks", "12.03.2021"));
         posts.put(2, new Post(2, "Middle Java Job", "Solving medium tasks", "12.03.2021"));
-        posts.put(3, new Post(3, "Senior Java Job","Solving hard tasks", "12.03.2021"));
+        posts.put(3, new Post(3, "Senior Java Job", "Solving hard tasks", "12.03.2021"));
     }
 
     public static PostStore instOf() {
@@ -33,10 +33,16 @@ public class PostStore {
     }
 
     public Post findById(int id) {
-        return posts.getOrDefault(id, new Post());
+        return posts.get(
+                posts.keySet()
+                        .stream()
+                        .filter(i -> i == id)
+                        .findFirst()
+                        .orElseThrow(RuntimeException::new)
+        );
     }
 
     public Post update(Post post) {
-        return add(post);
+        return posts.replace(post.getId(), post);
     }
 }
