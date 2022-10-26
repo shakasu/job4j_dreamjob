@@ -26,4 +26,22 @@ public class CandidateStore {
     public Collection<Candidate> findAll() {
         return candidates.values();
     }
+
+    public Candidate add(Candidate candidate) {
+        return candidates.put(candidate.getId(), candidate);
+    }
+
+    public Candidate findById(int id) {
+        return candidates.get(
+                candidates.keySet()
+                        .stream()
+                        .filter(i -> i == id)
+                        .findFirst()
+                        .orElseThrow(RuntimeException::new)
+        );
+    }
+
+    public Candidate update(Candidate candidate) {
+        return candidates.replace(candidate.getId(), candidate);
+    }
 }
