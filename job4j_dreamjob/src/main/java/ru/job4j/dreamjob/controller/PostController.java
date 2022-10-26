@@ -11,11 +11,13 @@ import ru.job4j.dreamjob.store.PostStore;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 public class PostController {
 
     private final PostStore postStore = PostStore.instOf();
+    private AtomicInteger id = new AtomicInteger(4);
 
     @GetMapping("/posts")
     public String posts(Model model) {
@@ -30,6 +32,7 @@ public class PostController {
 
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
+        post.setId(id.getAndIncrement());
         postStore.add(post);
         return "redirect:/posts";
     }
