@@ -9,14 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.store.CandidateStore;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 @Controller
 public class CandidateController {
 
     private final CandidateStore candidateStore = CandidateStore.instOf();
-    private AtomicInteger id = new AtomicInteger(4);
-
 
     @GetMapping("/candidates")
     public String candidates(Model model) {
@@ -31,7 +27,6 @@ public class CandidateController {
 
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate) {
-        candidate.setId(id.getAndIncrement());
         candidateStore.add(candidate);
         return "redirect:/candidates";
     }
