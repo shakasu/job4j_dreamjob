@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.service;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.Post;
@@ -9,10 +10,15 @@ import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
+@ThreadSafe
 public class PostService {
-    @Autowired
-    private PostStore store;
+    private final PostStore store;
     private AtomicInteger id = new AtomicInteger(4);
+
+    @Autowired
+    public PostService(PostStore store) {
+        this.store = store;
+    }
 
     public Collection<Post> findAll() {
         return store.findAll();

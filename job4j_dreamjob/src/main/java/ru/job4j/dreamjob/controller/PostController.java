@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.controller;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.service.PostService;
 
 @Controller
+@ThreadSafe
 public class PostController {
     @Autowired
     private PostService service;
