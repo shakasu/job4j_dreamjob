@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.store.PostStore;
@@ -9,7 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class PostService {
-    private final PostStore store = PostStore.instOf();
+    @Autowired
+    private PostStore store;
     private AtomicInteger id = new AtomicInteger(4);
 
     public Collection<Post> findAll() {
