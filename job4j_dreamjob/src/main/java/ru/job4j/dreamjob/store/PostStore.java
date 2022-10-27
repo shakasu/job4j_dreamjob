@@ -4,6 +4,7 @@ import ru.job4j.dreamjob.model.Post;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PostStore {
@@ -33,13 +34,7 @@ public class PostStore {
     }
 
     public Post findById(int id) {
-        return posts.get(
-                posts.keySet()
-                        .stream()
-                        .filter(i -> i == id)
-                        .findFirst()
-                        .orElseThrow(RuntimeException::new)
-        );
+        return Optional.ofNullable(posts.get(id)).orElseThrow(RuntimeException::new);
     }
 
     public Post update(Post post) {
