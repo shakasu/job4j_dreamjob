@@ -7,6 +7,7 @@ import ru.job4j.dreamjob.model.Candidate;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -34,7 +35,7 @@ public class CandidateStore {
     }
 
     public Candidate findById(int id) {
-        return Optional.ofNullable(candidates.get(id)).orElseThrow(RuntimeException::new);
+        return Optional.ofNullable(candidates.get(id)).orElseThrow(NoSuchElementException::new);
 
     }
 
