@@ -13,7 +13,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @ThreadSafe
 public class CandidateService {
     private final CandidateStore store;
-    private final AtomicInteger id = new AtomicInteger(4);
 
     @Autowired
     public CandidateService(CandidateStore store) {
@@ -25,7 +24,6 @@ public class CandidateService {
     }
 
     public Candidate add(Candidate candidate) {
-        candidate.setId(id.getAndIncrement());
         store.add(candidate);
         return candidate;
     }
