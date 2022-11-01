@@ -6,6 +6,7 @@ import ru.job4j.dreamjob.model.Post;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -33,7 +34,7 @@ public class PostStore {
     }
 
     public Post findById(int id) {
-        return Optional.ofNullable(posts.get(id)).orElseThrow(RuntimeException::new);
+        return Optional.ofNullable(posts.get(id)).orElseThrow(NoSuchElementException::new);
     }
 
     public Post update(Post post) {
