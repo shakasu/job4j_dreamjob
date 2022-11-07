@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Post;
+import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
 
 @Controller
@@ -16,6 +17,9 @@ import ru.job4j.dreamjob.service.PostService;
 public class PostController {
     @Autowired
     private PostService service;
+
+    @Autowired
+    private CityService cityService;
 
     @GetMapping("/posts")
     public String posts(Model model) {
@@ -25,6 +29,7 @@ public class PostController {
 
     @GetMapping("/formAddPost")
     public String formAddPost(Model model) {
+        model.addAttribute("cities", cityService.getAllCities());
         return "addPost";
     }
 

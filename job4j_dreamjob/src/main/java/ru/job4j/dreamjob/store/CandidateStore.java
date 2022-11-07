@@ -4,6 +4,7 @@ package ru.job4j.dreamjob.store;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
+import ru.job4j.dreamjob.model.City;
 
 import java.util.Collection;
 import java.util.Map;
@@ -20,9 +21,10 @@ public class CandidateStore {
     private final AtomicInteger id = new AtomicInteger(4);
 
     private CandidateStore() {
-        candidates.put(1, new Candidate(1, "Матвей Иванович", "Умный и недорогой", "12.03.2021"));
-        candidates.put(2, new Candidate(2, "Данил Петрович", "Умный и быстрый", "12.03.2021"));
-        candidates.put(3, new Candidate(3, "Василий Каренович","Быстрый и недорогой", "12.03.2021"));
+        var msk = new City(2, "Мск");
+        candidates.put(1, new Candidate(1, "Матвей Иванович", "Умный и недорогой", "12.03.2021", msk));
+        candidates.put(2, new Candidate(2, "Данил Петрович", "Умный и быстрый", "12.03.2021", msk));
+        candidates.put(3, new Candidate(3, "Василий Каренович","Быстрый и недорогой", "12.03.2021", msk));
     }
 
     public Collection<Candidate> findAll() {
