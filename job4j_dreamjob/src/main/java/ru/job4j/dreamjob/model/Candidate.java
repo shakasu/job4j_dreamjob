@@ -8,14 +8,16 @@ public class Candidate {
     private String desc;
     private String created;
     private City city;
+    private byte[] photo;
 
     public Candidate() {}
-    public Candidate(int id, String name, String desc, String created, City city) {
+    public Candidate(int id, String name, String desc, String created, City city, byte[] photo) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.created = created;
         this.city = city;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -56,6 +58,14 @@ public class Candidate {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     @Override

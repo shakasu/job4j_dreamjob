@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.model.City;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -20,11 +23,15 @@ public class CandidateStore {
 
     private final AtomicInteger id = new AtomicInteger(4);
 
-    private CandidateStore() {
+    private CandidateStore() throws IOException {
         var msk = new City(2, "Мск");
-        candidates.put(1, new Candidate(1, "Матвей Иванович", "Умный и недорогой", "12.03.2021", msk));
-        candidates.put(2, new Candidate(2, "Данил Петрович", "Умный и быстрый", "12.03.2021", msk));
-        candidates.put(3, new Candidate(3, "Василий Каренович","Быстрый и недорогой", "12.03.2021", msk));
+        byte[] photo1 = Files.readAllBytes(new File("job4j_dreamjob/src/main/resources/images/1.webp").toPath());
+        byte[] photo2 = Files.readAllBytes(new File("job4j_dreamjob/src/main/resources/images/2.webp").toPath());
+        byte[] photo3 = Files.readAllBytes(new File("job4j_dreamjob/src/main/resources/images/sticker.webp").toPath());
+
+        candidates.put(1, new Candidate(1, "Матвей Иванович", "Умный и недорогой", "12.03.2021", msk, photo1));
+        candidates.put(2, new Candidate(2, "Данил Петрович", "Умный и быстрый", "12.03.2021", msk, photo2));
+        candidates.put(3, new Candidate(3, "Василий Каренович","Быстрый и недорогой", "12.03.2021", msk, photo3));
     }
 
     public Collection<Candidate> findAll() {
