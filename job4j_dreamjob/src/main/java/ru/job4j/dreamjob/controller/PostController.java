@@ -12,6 +12,8 @@ import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @ThreadSafe
 public class PostController {
@@ -34,7 +36,8 @@ public class PostController {
     }
 
     @PostMapping("/createPost")
-    public String createPost(@ModelAttribute Post post) {
+    public String createPost(@ModelAttribute Post post, HttpServletRequest request) {
+        post.setCity(cityService.findById(Integer.parseInt(request.getParameter("city.id"))));
         service.add(post);
         return "redirect:/posts";
     }

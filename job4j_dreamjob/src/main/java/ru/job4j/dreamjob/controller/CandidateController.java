@@ -15,6 +15,7 @@ import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.service.CandidateService;
 import ru.job4j.dreamjob.service.CityService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
@@ -44,8 +45,10 @@ public class CandidateController {
 
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate,
-                                  @RequestParam("file") MultipartFile file) throws IOException {
+                                  @RequestParam("file") MultipartFile file,
+                                  HttpServletRequest request) throws IOException {
         candidate.setPhoto(file.getBytes());
+        candidate.setCity(cityService.findById(Integer.parseInt(request.getParameter("city.id"))));
         service.add(candidate);
         return "redirect:/candidates";
     }
