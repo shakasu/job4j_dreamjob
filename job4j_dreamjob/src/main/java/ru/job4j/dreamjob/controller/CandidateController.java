@@ -60,7 +60,10 @@ public class CandidateController {
     }
 
     @PostMapping("/updateCandidate")
-    public String updateCandidate(@ModelAttribute Candidate candidate) {
+    public String updateCandidate(@ModelAttribute Candidate candidate,
+                                  @RequestParam("file") MultipartFile file,
+                                  HttpServletRequest request) throws IOException {
+        candidate.setPhoto(file.getBytes());
         service.update(candidate);
         return "redirect:/candidates";
     }
